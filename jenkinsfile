@@ -4,8 +4,8 @@ pipeline {
         stage('Run Docker') {
             steps {
                 script {
-                    docker.image('node:16-alpine').inside('-w "/workspace"') {
-                        sh 'echo "Running inside container"'
+                    docker.image('node:16-alpine').inside("-v ${WORKSPACE}:/workspace -w /workspace") {
+                        sh 'ls -la'
                     }
                 }
             }

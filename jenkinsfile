@@ -1,12 +1,15 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        bat 'node --version'
-      }
+    agent {
+        docker {
+            image 'node:16-alpine'
+            args '-v %WORKSPACE%:/workspace -w /workspace'
+        }
     }
-  }
+    stages {
+        stage('Test') {
+            steps {
+                bat 'node --version'
+            }
+        }
+    }
 }
